@@ -1,5 +1,5 @@
 
-##Instructions for simulating tracks on 2D
+## Instructions for simulating tracks on 2D
 
 
 random_seed = 1        # also determines the name of the output file  
