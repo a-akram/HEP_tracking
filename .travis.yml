@@ -1,0 +1,28 @@
+language: python
+env:
+  - PYTHON_VERSION=2.7 IPYTHON_KERNEL=python2
+  - PYTHON_VERSION=3.6 IPYTHON_KERNEL=python3
+before_install:
+    - wget -q http://repo.continuum.io/miniconda/Miniconda-3.6.0-Linux-x86_64.sh -O miniconda.sh
+    - chmod +x miniconda.sh
+    - ./miniconda.sh -b -p /home/travis/miniconda
+    - export PATH=/home/travis/miniconda/bin:$PATH
+    - conda update --yes --quiet conda
+    - export RAMP_KITS_DIR='ramp-kits'
+install:
+    - conda create -n testenv --yes pip python=$PYTHON_VERSION
+    - source activate testenv
+    - conda install --yes --quiet numpy scipy scikit-learn pandas
+    - pip install codecov
+    - pip install -q flake8
+    - mkdir ramp-kits
+    - cd ramp-kits
+    - git clone https://github.com/ramp-kits/iris.git
+    - cd ..
+script:
+    - flake8 *.py
+    - coverage run prepare_data.py ramp_kits_dir=ramp-kits
+after_success:
+    - codecov
+notifications:
+  email: true
