@@ -8,18 +8,22 @@ before_install:
     - ./miniconda.sh -b -p /home/travis/miniconda
     - export PATH=/home/travis/miniconda/bin:$PATH
     - conda update --yes --quiet conda
+    - export RAMP_KITS_DIR='ramp-kits'
 install:
     - conda create -n testenv --yes pip python=$PYTHON_VERSION
     - source activate testenv
-    - conda install --yes --quiet numpy scipy matplotlib scikit-learn pandas jupyter
+    - conda install --yes --quiet numpy scipy pandas
+    - pip install codecov
     - pip install -q flake8
-    - git clone https://github.com/paris-saclay-cds/ramp-workflow.git
-    - cd ramp-workflow
-    - python setup.py install
-    - cd ..
+    - mkdir ramp-kits
+    - cd ramp-kits
+    - git clone https://github.com/ramp-kits/HEP_tracking.git
+    - cd simulation
 script:
-    - flake8 *.py submissions/*/*.py
-    - jupyter nbconvert --execute HEP_tracking_starting_kit.ipynb --ExecutePreprocessor.kernel_name=$IPYTHON_KERNEL
-    - ramp_test_submission
+    - flake8 *.py
+    - coverage run produce.py
+after_success:
+    - codecov
 notifications:
   email: true
+
