@@ -18,9 +18,7 @@ install:
     - python setup.py install
     - cd ..
 script:
-    - flake8 *.py submissions/*/*.py
+    - flake8 *.py simulation/*.py submissions/*/*.py
     - python simulation/produce.py
-    - jupyter nbconvert --execute HEP_tracking_starting_kit.ipynb --ExecutePreprocessor.kernel_name=$IPYTHON_KERNEL
-    - ramp_test_submission
 notifications:
   email: true
