@@ -32,11 +32,11 @@ data_particle = data_particle.drop(data_particle.index[[0]])
 np.random.seed(seed)
 event_offset = seed * N
 
-print "Will now produce ", N, " events with in average", nperevent, " tracks"
+print("Will now produce ", N, " events with in average", nperevent, " tracks")
 for ievent in range(event_offset, N + event_offset):
 
     if(ievent % 1 == 0):
-        print "processing event : ", ievent
+        print("processing event : ", ievent)
     event = pd.DataFrame({
         'event': [0], 'particle': [0], 'hit': [0],
         'layer': [0], 'iphi': [0],
