@@ -77,8 +77,7 @@ for ievent in range(event_offset, N + event_offset):
         event_particle = event_particle.append(pd.concat(
             [pd.DataFrame({'event': [ievent], 'particle':[p],
                            'pt':[charge * pt], 'phi':[phi],
-                           'xVtx':[xVtx], 'yVtx':[yVtx]})]
-        )
+                           'xVtx':[xVtx], 'yVtx':[yVtx]})])
         )
 
     hits = sim.detector.getHits()
@@ -103,10 +102,10 @@ data = data.drop(['hit'], axis=1)
 
 # precision could probably be reduced
 data.to_csv("hits_" + str(N) + "_" + str(seed) + ".csv", header=(seed == 0),
-            cols=['event', 'particle', 'layer', 'iphi', 'x', 'y'],
+            columns=['event', 'particle', 'layer', 'iphi', 'x', 'y'],
             index=False)
 data_particle.to_csv(
     "particles_" + str(N) + "_" +
     str(seed) + ".csv", header=(seed == 0),
-    cols=['event', 'particle', 'pt', 'phi', 'xVtx', 'yVtx'],
+    columns=['event', 'particle', 'pt', 'phi', 'xVtx', 'yVtx'],
     index=False)

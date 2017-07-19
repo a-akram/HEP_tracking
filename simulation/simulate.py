@@ -201,7 +201,9 @@ class Detector(object):
                                       'y': self.cells_y[irho, iphi]}),
                         ignore_index=True)
                     ihit += 1
-        self.history = self.history.sort_values(by=['particle', 'layer', 'hit'])
+        self.history = self.history.sort_values(
+            by=['particle', 'layer', 'hit']
+        )
 
         return self.history
 
