@@ -1,8 +1,7 @@
 import numpy as np
 import pandas as pd
-from transform import *
 import math
-
+from transform import rotate, deltaPhiAbs
 # TODO : inefficient if small pitch, probably the hit retrieving phase.
 # Also do not need both track array and hit
 
@@ -99,7 +98,7 @@ class Particle(object):
             self.history = self.history.append(pd.DataFrame({
                 'particle': [self.id],
                 'hit': [time],
-                'layer': self.layer, 'iphi': iphi,
+                'layer': self.layer, 'iphi': self.iphi,
                 'x': [self.position[0]], 'y': [self.position[1]]}),
                 ignore_index=True
             )
@@ -335,10 +334,3 @@ class Simulator(object):
                 break
 
         return self.p.history
-
-    def plot(self):
-
-        x = np.dstack((self.p.history['x'].values))[0][0]
-        y = np.dstack((self.p.history['y'].values))[0][0]
-        plt.plot(x, y)
-        plt.show()

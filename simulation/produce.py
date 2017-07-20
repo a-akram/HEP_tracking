@@ -1,9 +1,7 @@
-
-
 import numpy as np
+import pandas as pd
 import argparse
-
-from simulate import *
+from simulate import Simulator
 
 sim = Simulator()
 

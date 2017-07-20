@@ -18,7 +18,7 @@ install:
     - python setup.py install
     - cd ..
 script:
-    - flake8 --ignore F403,F405 *.py simulation/*.py submissions/*/*.py
+    - flake8 *.py simulation/*.py submissions/*/*.py
     - python simulation/produce.py
 notifications:
   email: true
