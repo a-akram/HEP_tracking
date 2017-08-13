@@ -8,8 +8,7 @@ Predictions = rw.prediction_types.make_clustering()
 # An object implementing the workflow
 workflow = rw.workflows.Clusterer()
 score_types = [
-    rw.score_types.ClusteringEfficiency(
-        name='clustering efficiency', precision=3),
+    rw.score_types.ClusteringEfficiency(name='efficiency', precision=3),
 ]
 # validation folds don't cut into events
 cv = rw.cvs.Clustering(n_cv=1, cv_test_size=0.5, random_state=57)
